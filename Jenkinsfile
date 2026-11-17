@@ -21,8 +21,9 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', '${DOCKER_CREDENTIALS_ID}') {
+                    docker.withRegistry('https://registry.hub.docker.com', env.DOCKER_CREDENTIALS_ID) {
                         docker.build("${DOCKER_IMAGE}:${IMAGE_TAG}")
+                    }
                 }
             }
         }
