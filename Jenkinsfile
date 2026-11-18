@@ -42,7 +42,8 @@ pipeline {
             steps {
                 script {
                     // This sets up the Kubernetes configuration using the specified KUBECONFIG
-                    
+                    sh 'if [ -f "$KUBECONFIG" ]; then echo "KUBECONFIG file exists"; else echo "KUBECONFIG file missing"; fi'
+                    sh 'kubectl config current-context'
                     // This updates the deployment-dev.yaml to use the new image tag
                     sh "sed -i 's|${DOCKER_IMAGE}:latest|${DOCKER_IMAGE}:${IMAGE_TAG}|' deployment-dev.yaml"
                     sh "kubectl apply -f deployment-dev.yaml"
