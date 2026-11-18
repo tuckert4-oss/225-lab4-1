@@ -46,6 +46,7 @@ pipeline {
                     sh 'kubectl config current-context'
                     // This updates the deployment-dev.yaml to use the new image tag
                     sh "sed -i 's|${DOCKER_IMAGE}:latest|${DOCKER_IMAGE}:${IMAGE_TAG}|' deployment-dev.yaml"
+                    sh 'kubectl config view --minify'
                     sh "kubectl apply -f deployment-dev.yaml"
                 }
             }
