@@ -50,12 +50,12 @@ spec:
           ports:
             - containerPort: 5000
           volumeMounts:
-            - name: nfs-storage
+            - name: data
               mountPath: /nfs       
       volumes:
-        - name: nfs-storage
+        - name: data
           persistentVolumeClaim:
-            claimName: flask-pvc    
+            claimName: student-storage     
 ---
 apiVersion: v1
 kind: Service
