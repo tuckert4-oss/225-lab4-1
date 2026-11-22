@@ -38,7 +38,7 @@ pipeline {
 
         stage('Dependency Scan') {
             steps {
-                sh 'python3 -m pip_audit --local'
+                sh 'python3 -m pip_audit --no-deps --disable-pip -r requirements-audit.txt'
             }
         }
 
