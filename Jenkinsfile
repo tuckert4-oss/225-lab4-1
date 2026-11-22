@@ -17,7 +17,32 @@ pipeline {
                           userRemoteConfigs: [[url: "${GITHUB_URL}"]]])
             }
         }
+           
+        stage('Install Testing Tools') {
+            steps {
+                sh 'python3 -m pip install -r requirements.txt'
+            }
+        }
 
+        stage('Python Tests') {
+            steps {
+                sh 'python3 -m pytest test_main.py -v'
+            }
+        }
+
+        stage('Security Scan') {
+            steps {
+                sh 'python3 -m bandit main.py'
+            }
+        }
+
+        stage('Dependency Scan') {
+            steps {
+                sh 'pip-audit -r requirements.txt'
+            }
+        }
+
+        
         stage('Build Docker Image') {
             steps {
                 script {
