@@ -38,7 +38,7 @@ pipeline {
 
         stage('Dependency Scan') {
             steps {
-                sh 'pip-audit -r requirements.txt'
+                sh 'python3 -m pip_audit -r requirements.txt'
             }
         }
 
